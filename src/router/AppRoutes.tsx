@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import LeaderBoard from "../components/LeaderBoard";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
     return(
@@ -22,7 +23,7 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
             
-            <Route path = '/games' /*component={}*/ />
+            <Route path = '/leaderboard' component={LeaderBoard}/>
 
             <Route path = '/example' component={() => {return(<h1>Instead of a lambda and a header here, you put a component, like the example above! AppRoutes.tsx</h1>) }} />
         </Switch>
