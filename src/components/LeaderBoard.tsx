@@ -1,10 +1,38 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { UserProfile } from "../models/UserProfile";
+import { apiGetProfiles } from "../remote/SpringApi";
 
 //this function prints the leader board table
 const LeaderBoard = () => {
+    const [userProfileSet, setUserProfiles] = useState<UserProfile[]>([]);
+
+    useEffect(()=>{
+      getAllUserProfiles()
+    }, [])
+
+    const getAllUserProfiles = async () => {
+      let allProfiles:UserProfile[] = await apiGetProfiles();
+      setUserProfiles(allProfiles);
+    }
+
+    const profileTable = () => (
+      userProfileSet.map((profiles: UserProfile) => (
+        <tr>
+          <td></td>
+          <td>{profiles.screenName}</td>
+          <td>{profiles.number_of_questions}</td>
+          <td>{profiles.accuracy}</td>
+          <td>{profiles.score}</td>
+        </tr>
+      ))
+    );
+
     return (
         <div className='container-fluid'>
-        <table>
+          <h2>Leader Board</h2>
+          <hr/>
+          <table className="table">
             <thead>
               <tr>
                 <th>Rank</th>
@@ -15,9 +43,11 @@ const LeaderBoard = () => {
               </tr>
             </thead>
             <tbody>
+              {profileTable()}
             </tbody>
-        </table>
-        </div>)
+          </table>
+        </div>
+    )
 }
 
 export default LeaderBoard;

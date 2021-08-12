@@ -1,4 +1,4 @@
-export class userProfile {
+export class UserProfile {
     constructor(public username:String,
         public password:String,
         public screenName:String,
