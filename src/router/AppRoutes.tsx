@@ -24,7 +24,13 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
 
-            <Route path = '/game' render = { () => {return <DifficultyButton difficulty='Easy' bootstrapColor="success"/>} }/>
+            <Route path = '/game' render = { () => {return <DifficultyButton 
+                    difficulty='Easy' 
+                    bootstrapColor="success" 
+                    onClick = {() => {console.log("button clicked")}}
+                    />
+                }
+            }/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 
