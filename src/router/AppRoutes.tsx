@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import DifficultyButton from "../components/DifficultyButton";
 import LeaderBoard from "../components/LeaderBoard";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
     return(
         <Switch>
-            <Route exact path ='/this' render = {() => {return(
+            <Route exact path ='/' render = {() => {return(
                 <div className='container-fluid'>
                     <div className='row'>
                         <h1 className='col-lg-12'>Insert component here! AppRoutes.tsx</h1>
@@ -13,7 +14,7 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
 
-            <Route exact path = '/' render = {() => {return(
+            <Route exact path = '/this' render = {() => {return(
                 <div>
                     <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" checked />
                     <label className="btn btn-outline-success" htmlFor="success-outlined">Checked success radio</label>
@@ -22,6 +23,8 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                     <label className="btn btn-outline-danger" htmlFor="danger-outlined">Danger radio</label>
                 </div>
             )}}/>
+
+            <Route path = '/game' render = { () => {return <DifficultyButton difficulty='Easy' bootstrapColor="success"/>} }/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 

@@ -6,6 +6,7 @@ export const getQuestion = async (difficulty:string) => {
     if(response.status == 200){
         let data = response.data;
         //debug
+        console.log("DEBUG IN questionAPI.ts:")
         console.log("This is the data returned");
         console.log(data)
         return data;
