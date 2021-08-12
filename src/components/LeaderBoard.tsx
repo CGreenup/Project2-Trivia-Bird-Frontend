@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { UserProfile } from "../models/UserProfile";
-import { apiGetProfiles } from "../remote/SpringApi";
+import { ApiGetProfiles } from "../remote/SpringApi";
 
 //this function prints the leader board table
 const LeaderBoard = () => {
@@ -12,7 +12,7 @@ const LeaderBoard = () => {
     }, [])
 
     const getAllUserProfiles = async () => {
-      let allProfiles:UserProfile[] = await apiGetProfiles();
+      let allProfiles:UserProfile[] = await ApiGetProfiles();
       setUserProfiles(allProfiles);
     }
 

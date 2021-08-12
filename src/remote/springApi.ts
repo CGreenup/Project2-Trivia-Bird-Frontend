@@ -2,7 +2,7 @@ import { UserProfile } from "../models/UserProfile";
 import SpringClient from "./SpringClient";
 
 //get all profiles from back end
-export const apiGetProfiles = async():Promise<UserProfile[]> => {
+export const ApiGetProfiles = async():Promise<UserProfile[]> => {
     const response = await SpringClient.get<UserProfile[]>('/profile/');
 
     if (response.status = 200) {
