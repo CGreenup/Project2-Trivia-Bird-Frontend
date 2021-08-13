@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DifficultyButton from "../components/DifficultyButton";
+import DifficultySelector from "../components/DifficultySelector";
 import LeaderBoard from "../components/LeaderBoard";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
@@ -34,7 +35,7 @@ const AppRoutes:React.FC<unknown> = (props) =>{
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 
-            <Route path = '/example' component={() => {return(<h1>Instead of a lambda and a header here, you put a component, like the example above! AppRoutes.tsx</h1>) }} />
+            <Route path = '/example' component={DifficultySelector} />
         </Switch>
     );
 }

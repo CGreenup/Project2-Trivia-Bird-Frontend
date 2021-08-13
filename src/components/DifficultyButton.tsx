@@ -15,13 +15,13 @@ const DifficultyButton: React.FC<Props> = (props) => {
             setText(props.difficulty);
             setColor(props.bootstrapColor || "primary");
         },
-        [props.difficulty]
+        [props.difficulty, props.bootstrapColor]
      );
 
     return (
         <div>
             <input type="radio" className="btn-check" name="options-outlined" id={difficultyText} autoComplete="off" value={difficultyText.toLowerCase()} onClick={props.onClick} />
-            <label className={"btn btn-outline-"+outlineColor} htmlFor={difficultyText}> {difficultyText} </label>
+            <label className={"btn btn-outline-" + outlineColor} htmlFor={difficultyText}> {difficultyText} </label>
         </div>
     )
 }

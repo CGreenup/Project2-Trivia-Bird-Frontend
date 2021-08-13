@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const questionClient = axios.create({
-    baseURL:'https://opentdb.com/api.php?amount=1&difficulty=',
+    baseURL:'https://opentdb.com',
     headers: {
         'Content-Type': 'application/json'
     }
