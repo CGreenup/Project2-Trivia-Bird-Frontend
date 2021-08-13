@@ -4,6 +4,6 @@ export class question {
         public difficulty:string, 
         public question: string, 
         public correctAnswer: string,
-        public incorrectAnswers: string)
+        public answers: Array<string>)
         {}
 }

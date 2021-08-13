@@ -25,17 +25,16 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
 
-            <Route path = '/game' render = { () => {return <DifficultyButton 
-                    difficulty='Easy' 
-                    bootstrapColor="success" 
-                    onClick = {() => {console.log("button clicked")}}
-                    />
-                }
-            }/>
+            <Route path = '/game' component={DifficultySelector}/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 
-            <Route path = '/example' component={DifficultySelector} />
+            <Route path = '/example' render = { () => {return <DifficultyButton 
+                    difficulty='Easy' 
+                    bootstrapColor="success" 
+                    onClick = {() => {console.log("button clicked")}}
+                    />}
+                }/>
         </Switch>
     );
 }

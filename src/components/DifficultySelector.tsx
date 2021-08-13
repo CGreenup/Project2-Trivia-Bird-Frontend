@@ -7,8 +7,14 @@ const DifficultySelector:React.FC<unknown> = () => {
     const difficulties:string[] = ["Easy", "Medium", "Hard"];
 
     return(<div>
-        <DifficultyButton difficulty='Easy' bootstrapColor='success' onClick = {() => {getQuestion('Hard')}}></DifficultyButton>
+        {mapButtons(difficulties)}
     </div>)
 }
+
+const mapButtons = (difficulties: string[]) => (
+    difficulties.map((difficultySetting: string) => (
+        <DifficultyButton key={difficultySetting} difficulty={difficultySetting} bootstrapColor="primary" onClick = {() => getQuestion(difficultySetting)} />
+    ))
+)
 
 export default DifficultySelector
