@@ -25,7 +25,9 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
 
-            <Route path = '/game' component={DifficultySelector}/>
+            <Route exact path = '/game' component={DifficultySelector}/>
+
+            <Route path = '/game/:diff' />
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 
