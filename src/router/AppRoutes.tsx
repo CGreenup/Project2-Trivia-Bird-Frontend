@@ -15,17 +15,7 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                     </div>
                 </div>
             )}}/>
-
-            <Route exact path = '/this' render = {() => {return(
-                <div>
-                    <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" checked />
-                    <label className="btn btn-outline-success" htmlFor="success-outlined">Checked success radio</label>
             
-                    <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" />
-                    <label className="btn btn-outline-danger" htmlFor="danger-outlined">Danger radio</label>
-                </div>
-            )}}/>
-
             <Route exact path = '/game' component={DifficultySelector}/>
 
             <Route path = '/game/:difficulty' component= {GameUI}/>
