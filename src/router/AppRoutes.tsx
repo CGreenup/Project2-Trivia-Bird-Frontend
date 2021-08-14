@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DifficultyButton from "../components/DifficultyButton";
 import DifficultySelector from "../components/DifficultySelector";
+import GameUI from "../components/GameUI";
 import LeaderBoard from "../components/LeaderBoard";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
@@ -27,7 +28,7 @@ const AppRoutes:React.FC<unknown> = (props) =>{
 
             <Route exact path = '/game' component={DifficultySelector}/>
 
-            <Route path = '/game/:diff' />
+            <Route path = '/game/:difficulty' component= {GameUI}/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 

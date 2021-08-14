@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import DifficultyButton from "./DifficultyButton";
 
-const DifficultySelector:React.FC<unknown> = () => {
+type Props = {
+    userId?:number;
+}
+
+const DifficultySelector:React.FC<Props> = (props) => {
     const [isDisabled, setDisabled] = useState(true)
     const [paramValue, setValue] = useState("");
     const [redirect, setRedirect] = useState(false);
