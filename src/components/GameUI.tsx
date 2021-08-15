@@ -22,6 +22,8 @@ const GameUI:React.FC<unknown> = () => {
     function replaceEncodedCharacters(input:string):string{
         let newString:string = input;
         
+        //I'm sure there's a regex for this, but I do not know it right now
+        //This could be condensed onto one line, but I'm not a sadist. At least this is readable
         newString = newString.replaceAll("&#039;", "'");
         newString = newString.replaceAll("&quot;", '"');
         newString = newString.replaceAll("&amp;", "&");
@@ -31,10 +33,13 @@ const GameUI:React.FC<unknown> = () => {
         return newString;
     }
 
+    //Get the question JSON and set the various states for later use.
     async function getData () {
+        //Debug logging
         console.log("===============");
         console.log("In getData");
 
+        //Get the JSON using the questionAPI and Axios
         let data:any = await getQuestion(difficulty);
         console.log(data);
 
@@ -63,14 +68,13 @@ const GameUI:React.FC<unknown> = () => {
     }
     
     const getQuestionInformation = () => {
-        console.log("Getting question element!")
         if(renders < 1){
             setRenders(renders + 1);
             getData();
         }
     }
 
-    function mapData(answers:string[]){
+    function mapButtonField(answers:string[]){
         return (
             (!submittedAnswer)?
             <div className="row row-cols-2" style = {{margin:20}}>
@@ -87,12 +91,12 @@ const GameUI:React.FC<unknown> = () => {
                 })}
             </div> :
             <div>
-                <p className= {"h2 container py-1 bg-" + ((userAnswer == correctAnswer)?'success':'danger')} style={{borderRadius: 6}}>
+                <p className= {"h2 container py-1 bg-" + ((userAnswer == correctAnswer)?'success text-white':'danger')} style={{borderRadius: 6}}>
                     ══════════
                     <br></br>
                     {(userAnswer == correctAnswer)?'Correct!':'Incorrect.'} {" The answer was "} {correctAnswer} 
                     <br></br>
-                    ══════════
+                    ══════════»
                 </p>
             </div>
         )
@@ -107,7 +111,7 @@ const GameUI:React.FC<unknown> = () => {
         <div>
             <br/>
             <h2>{questionString}</h2>
-            {mapData(answersArray)}
+            {mapButtonField(answersArray)}
             <p>Quiz questions brought to you by <i>Open Trivia Database</i> by <b>PIXELTAIL GAMES LLC</b></p>
         </div>
     )
