@@ -5,7 +5,7 @@ import SpringClient from "./SpringClient";
 export const ApiGetProfiles = async():Promise<UserProfile[]> => {
     const response = await SpringClient.get<UserProfile[]>('/profile/');
 
-    if (response.status = 200) {
+    if (response.status === 200) {
         return response.data;
     }
 
