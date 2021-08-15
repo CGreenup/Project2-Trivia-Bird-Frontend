@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { question } from "../models/question";
+import { postAnswer } from "../remote/answerApi";
 import { getQuestion } from "../remote/questionApi";
 
 const GameUI:React.FC<unknown> = () => {
@@ -105,6 +107,9 @@ const GameUI:React.FC<unknown> = () => {
     function submitAnswer(input:string){
         setSubmit(true);
         setUserAnswer(input);
+
+        let answer:question = new question(difficulty, correctAnswer, userAnswer);
+        //postAnswer(answer);
     }
 
     return (

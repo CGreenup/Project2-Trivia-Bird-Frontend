@@ -1,4 +1,3 @@
-import { question } from "../models/question";
 import questionClient from "./questionClient";
 
 export const getQuestion = async (difficulty:string) => {
