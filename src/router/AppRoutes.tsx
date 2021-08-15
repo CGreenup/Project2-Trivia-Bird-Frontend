@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DifficultyButton from "../components/DifficultyButton";
 import DifficultySelector from "../components/DifficultySelector";
+import GameUI from "../components/GameUI";
 import LeaderBoard from "../components/LeaderBoard";
 import LogIn from "../components/LogIn";
 import NewProfile from "../components/NewProfile";
@@ -16,22 +17,14 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                     </div>
                 </div>
             )}}/>
-
-            <Route exact path = '/this' render = {() => {return(
-                <div>
-                    <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" checked />
-                    <label className="btn btn-outline-success" htmlFor="success-outlined">Checked success radio</label>
             
-                    <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" />
-                    <label className="btn btn-outline-danger" htmlFor="danger-outlined">Danger radio</label>
-                </div>
-            )}}/>
-
+            <Route exact path = '/game' component={DifficultySelector}/>
+        
             <Route path = '/login' component={LogIn}/>
 
             <Route path = '/newprofile' component={NewProfile}/>
             
-            <Route path = '/game' component={DifficultySelector}/>
+            <Route path = '/game/:difficulty' component= {GameUI}/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 
