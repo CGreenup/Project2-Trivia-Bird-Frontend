@@ -12,17 +12,21 @@ const GameUI:React.FC<unknown> = () => {
     const [answersArray, setAnswers] = useState(Array<string>());
     const [correctAnswer, setCorrectAnswer] = useState("");
     const [renders, setRenders] = useState(0);
+    const [submittedAnswer, setSubmit] = useState(false);
+    const [userAnswer, setUserAnswer] = useState("");
 
     useEffect( () => {
         getQuestionInformation();
-    }, [] )
+    })
 
-    function replaceEncodedCharacters(input:string){
+    function replaceEncodedCharacters(input:string):string{
         let newString:string = input;
         
         newString = newString.replaceAll("&#039;", "'");
         newString = newString.replaceAll("&quot;", '"');
         newString = newString.replaceAll("&amp;", "&");
+        newString = newString.replaceAll("&deg;", "°")
+        newString = newString.replaceAll("&ntilde;", "~")
 
         return newString;
     }
@@ -40,15 +44,21 @@ const GameUI:React.FC<unknown> = () => {
         let answers:string[] = Array<string>();
         answers = [...data.results[0].incorrect_answers, data.results[0].correct_answer];
         answers.sort();
+
+        for(let i = 0; i < answers.length; i++){
+            answers[i] = replaceEncodedCharacters(answers[i]);
+        }
+
         setAnswers([...answers]);
 
-        let correct_answer:string = data.results[0].correct_answer;
+        let correct_answer:string = replaceEncodedCharacters(data.results[0].correct_answer);
 
         setCorrectAnswer(correct_answer);
 
-        console.log(data.results[0].question)
+        console.log(data.results[0].question);
         // answersArray.map((ans:string) => {console.log(ans)} )
         console.log(question);
+        console.log(correct_answer);
         console.log("===============");
     }
     
@@ -62,10 +72,11 @@ const GameUI:React.FC<unknown> = () => {
 
     function mapData(answers:string[]){
         return (
+            (!submittedAnswer)?
             <div className="row row-cols-2" style = {{margin:20}}>
                 {answers.map( (answer:string) => {
                     return(<div className = "col py-1 px-1">
-                        <button className = "btn btn-lg btn-outline-info form-control">
+                        <button className = "btn btn-lg btn-outline-info form-control" onClick = {() => submitAnswer(answer)}>
                             -
                             <br></br>
                             {answer}
@@ -74,8 +85,22 @@ const GameUI:React.FC<unknown> = () => {
                         </button>
                     </div>)
                 })}
+            </div> :
+            <div>
+                <p className= {"h2 container py-1 bg-" + ((userAnswer == correctAnswer)?'success':'danger')} style={{borderRadius: 6}}>
+                    ══════════
+                    <br></br>
+                    {(userAnswer == correctAnswer)?'Correct!':'Incorrect.'} {" The answer was "} {correctAnswer} 
+                    <br></br>
+                    ══════════
+                </p>
             </div>
         )
+    }
+
+    function submitAnswer(input:string){
+        setSubmit(true);
+        setUserAnswer(input);
     }
 
     return (
