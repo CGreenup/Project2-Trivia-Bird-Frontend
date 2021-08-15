@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import React from "react";
 import { useState, useEffect } from "react";
 import { UserProfile } from "../models/UserProfile";
@@ -6,6 +7,7 @@ import { ApiGetProfiles } from "../remote/SpringApi";
 //this function prints the leader board table
 const LeaderBoard = () => {
     const [userProfileSet, setUserProfiles] = useState<UserProfile[]>([]);
+    const [userRank, setUserRank] = useState<number>(1);
 
     useEffect(()=>{
       getAllUserProfiles()
@@ -15,15 +17,16 @@ const LeaderBoard = () => {
       let allProfiles:UserProfile[] = await ApiGetProfiles();
       setUserProfiles(allProfiles);
     }
-
+    
     const profileTable = () => (
       userProfileSet.map((profiles: UserProfile) => (
         <tr>
-          <td></td>
+          <td>{userRank}</td>
           <td>{profiles.screenName}</td>
           <td>{profiles.number_of_questions}</td>
           <td>{profiles.accuracy}</td>
           <td>{profiles.score}</td>
+          <td>(setUserRank(userRank+1))</td>
         </tr>
       ))
     );
