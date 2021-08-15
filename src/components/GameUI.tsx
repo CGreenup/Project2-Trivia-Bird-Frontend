@@ -15,16 +15,23 @@ const GameUI:React.FC<unknown> = () => {
         getQuestionElement();
     }, [] )
 
+    function replaceEncodedCharacters(input:string){
+        let newString:string = input;
+        
+        newString = newString.replaceAll("&#039;", "'");
+        newString = newString.replaceAll("&quot;", '"');
+        newString = newString.replaceAll("&amp;", "&");
+
+        return newString;
+    }
+
     async function getData () {
         console.log("===============")
         console.log("In getData")
         console.log("getting question data")
         let data:any = await getQuestion(difficulty);
         console.log(data);
-        let question:string = data.results[0].question;
-        question = question.replaceAll("&#039;", "'");
-        question = question.replaceAll("&quot;", '"');
-        question = question.replaceAll("&amp;", "&")
+        let question:string = replaceEncodedCharacters(data.results[0].question);
         
         setQuestion(question);
 
