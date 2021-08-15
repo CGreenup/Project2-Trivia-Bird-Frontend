@@ -8,11 +8,13 @@ const GameUI:React.FC<unknown> = () => {
     const params:any  = useParams();
     const difficulty:string = params.difficulty
 
-    const [questionString, setQuestion] = useState("");
+    const [questionString, setQuestion] = useState("Loading Question...");
+    const [answersArray, setAnswers] = useState(Array<string>())
+    const [correctAnswer, setCorrectAnswer] = useState("");
     const [renders, setRenders] = useState(0);
 
     useEffect( () => {
-        getQuestionElement();
+        getQuestionInformation();
     }, [] )
 
     function replaceEncodedCharacters(input:string){
@@ -28,34 +30,34 @@ const GameUI:React.FC<unknown> = () => {
     async function getData () {
         console.log("===============")
         console.log("In getData")
-        console.log("getting question data")
+
         let data:any = await getQuestion(difficulty);
         console.log(data);
+
         let question:string = replaceEncodedCharacters(data.results[0].question);
-        
         setQuestion(question);
 
+        let answers:string[] = Array<string>();
+        answers = [...data.results[0].incorrect_answers, data.results[0].correct_answer];
+        answers.sort();
+
         console.log(data.results[0].question)
+        answers.map((ans:string) => {console.log(ans)} )
         console.log(question);
     }
     
-    const getQuestionElement = () => {
+    const getQuestionInformation = () => {
         console.log("Getting question element!")
         if(renders < 1){
             setRenders(renders + 1);
-            console.log("Renders are less than 1, so I'm getting the data Renders:"+renders)
             getData();
-            setQuestion("Loading question...")
         }
-        return "Question:" +  questionString;
-            
-        
     }
 
     return (
         <div>
             <h2>{questionString}</h2>
-            <p>Quiz questions brought to you by Open Trivia Database by PIXELTAIL GAMES LLC</p>
+            <p>Quiz questions brought to you by <i>Open Trivia Database</i> by <b>PIXELTAIL GAMES LLC</b></p>
         </div>
     )
 }
