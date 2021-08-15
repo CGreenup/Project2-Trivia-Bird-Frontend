@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import DifficultyButton from "../components/DifficultyButton";
 import DifficultySelector from "../components/DifficultySelector";
 import LeaderBoard from "../components/LeaderBoard";
+import LogIn from "../components/LogIn";
+import NewProfile from "../components/NewProfile";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
     return(
@@ -25,6 +27,10 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
 
+            <Route path = '/login' component={LogIn}/>
+
+            <Route path = '/newprofile' component={NewProfile}/>
+            
             <Route path = '/game' component={DifficultySelector}/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>

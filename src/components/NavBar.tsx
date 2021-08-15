@@ -7,6 +7,14 @@ const NavBar:React.FC<unknown> = (props) => {
             <Link className = 'navbar-brand' to='/this'>Welcome</Link>
 
                 <span className="navbar-nav">
+                    <NavLink className = 'nav-link' to = '/login'> Log In </NavLink>
+                </span>
+                
+                <span className="navbar-nav">
+                    <NavLink className = 'nav-link' to = '/newprofile'> Add Profile </NavLink>
+                </span>
+
+                <span className="navbar-nav">
                     <NavLink className = 'nav-link' to = '/game'> New Question </NavLink>
                 </span>
 
