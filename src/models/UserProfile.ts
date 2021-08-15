@@ -1,5 +1,7 @@
 export class UserProfile {
-    constructor(public username:String,
+    constructor(
+        public id:number,
+        public username:String,
         public password:String,
         public screenName:String,
         public email:String,
