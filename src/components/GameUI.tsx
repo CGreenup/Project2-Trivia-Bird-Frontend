@@ -93,12 +93,12 @@ const GameUI:React.FC<unknown> = () => {
                 })}
             </div> :
             <div>
-                <p className= {"h2 container py-1 bg-" + ((userAnswer == correctAnswer)?'success text-white':'danger')} style={{borderRadius: 6}}>
+                <p className= {"h2 container py-1 bg-" + ((userAnswer === correctAnswer)?'success text-white':'danger')} style={{borderRadius: 6}}>
                     ══════════
                     <br></br>
-                    {(userAnswer == correctAnswer)?'Correct!':'Incorrect.'} {" The answer was "} {correctAnswer} 
+                    {(userAnswer === correctAnswer)?'Correct!':'Incorrect.'} {" The answer was "} {correctAnswer} 
                     <br></br>
-                    ══════════»
+                    ══════════
                 </p>
             </div>
         )
@@ -108,8 +108,10 @@ const GameUI:React.FC<unknown> = () => {
         setSubmit(true);
         setUserAnswer(input);
 
-        let answer:question = new question(difficulty, correctAnswer, userAnswer);
-        //postAnswer(answer);
+        let answer:question = new question(difficulty, correctAnswer, input);
+
+        console.log(answer);
+        postAnswer(answer);
     }
 
     return (

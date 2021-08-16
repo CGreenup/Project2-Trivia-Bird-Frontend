@@ -4,5 +4,5 @@ export class question {
         public difficulty:string,
         public correctAnswer: string,
         public answer: string)
-        {}
+        {} 
 }
