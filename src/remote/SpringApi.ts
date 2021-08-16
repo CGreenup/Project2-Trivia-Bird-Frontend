@@ -14,11 +14,13 @@ export const ApiGetProfiles = async():Promise<UserProfile[]> => {
 
 
 //check login profile with back end
-export const ApiValidateProfiles = async(checkProfile:UserProfile):Promise<boolean> => {
+export const ApiValidateProfiles = async(checkProfile:UserProfile):Promise<UserProfile|boolean> => {
     const response = await SpringClient.post<UserProfile>('/profile/', checkProfile);
+    
 
     if (response.status === 200) {
-        return true;
+        let data = await response.data;
+        return data;
     }
 
     return false;
