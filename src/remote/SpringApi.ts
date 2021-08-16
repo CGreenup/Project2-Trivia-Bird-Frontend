@@ -36,3 +36,30 @@ export const ApiPutProfiles = async(checkProfile:UserProfile):Promise<boolean> =
 
     return false;
 }
+
+export const ApiUpdateScreenName = async(checkProfile:UserProfile):Promise<boolean> => {
+    const response = await SpringClient.put<UserProfile>('/profile/', checkProfile);
+
+    if (response.status === 200) {
+        return true;
+    }
+
+    return false;
+}
+
+export const ApiUpdateProfileBio = async(checkProfile:UserProfile):Promise<boolean> => {
+    const response = await SpringClient.put<UserProfile>('/profile/', checkProfile);
+
+    if (response.status === 200) {
+        return true;
+    }
+
+    return false;
+}
+
+export const ApiGetProfile = async(username:string):Promise<UserProfile> => {
+    const response = await SpringClient.get<UserProfile>('/profile/'+ username);
+
+        return await response.data;
+
+}

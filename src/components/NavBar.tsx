@@ -23,7 +23,7 @@ const NavBar:React.FC<unknown> = (props) => {
                 </span>
 
                 <span className="navbar-nav">
-                    <NavLink className = 'nav-link' to = '/example'> Example Item </NavLink>
+                    <NavLink className = 'nav-link' to = '/profile'> Profile </NavLink>
                 </span>
         </nav>
     );

@@ -2,32 +2,73 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import { UserProfile } from "../models/UserProfile";
 import { ApiUpdateScreenName } from "../remote/SpringApi";
+import { ApiUpdateProfileBio } from "../remote/SpringApi";
+import { ApiGetProfile } from "../remote/SpringApi";
 
+type Props = {
+  userProfile: UserProfile
+}
 
-const ProfileInfo = () => {
-    //const [userProfileSet, setUserProfiles] = useState<UserProfile[]>([]);
-    const [profile, setProfile] = useState<UserProfile>();
+const ProfileInfo:React.FC<Props> = (props) => {
+    const [profile, setProfile] = useState<UserProfile>(new UserProfile("", "", "", "", "", 0 , 0, 0));
     const [profileBio, setProfileBio] = useState<string>('');
     const [profileScreenName, setScreenName] = useState<string>('');
 
 
-
     useEffect(()=>{
-      getUserProfile()
-    }, [])
+      getUserProfile();
+  })
+
+    const updateScreenName = async () => {
+
+      let tempProfile = await ApiGetProfile(props.userProfile.username.toString());
+
+      tempProfile.screenName = profileScreenName;
+
+      ApiUpdateScreenName(tempProfile);
+
+      setProfile(tempProfile);
+    }
+
+    const updateProfileBio = async () => {
+
+      let tempProfile = await ApiGetProfile(props.userProfile.username.toString());
+
+      tempProfile.bio = profileBio;
+
+      ApiUpdateProfileBio(tempProfile);
+
+      setProfile(tempProfile);
+    }
 
     const getUserProfile = async () => {
-      let allProfiles:UserProfile[] = await ApiGetProfiles();
-      setUserProfiles(UserProfile);
-    }
+      let tempProfile = await ApiGetProfile(props.userProfile.username.toString());
+      setProfile(tempProfile);
+   }
 
 
 
     return (
         <div className='container-fluid'>
           <h2>Profile Information</h2>
-         
           <br></br>
+          <br></br>
+          <form>
+            <label className="label col-sm-3">Screen Name: {profile.screenName}</label>
+            <br></br>
+            <label className="label col-sm-3">Email: {profile.email}</label>
+            <br></br>
+            <label className="label col-sm-3">Bio: {profile.bio}</label>
+            <br></br>
+            <label className="label col-sm-3">Accuracy: {profile.accuracy}</label>
+            <br></br>
+            <label className="label col-sm-3">Number of Questions: {profile.number_of_questions}</label>
+            <br></br>
+            <label className="label col-sm-3">Score: {profile.score}</label>
+            <br></br>
+
+          </form>
+
           <br></br>
 
           <form>

@@ -7,10 +7,11 @@ import GameUI from "../components/GameUI";
 import LeaderBoard from "../components/LeaderBoard";
 import LogIn from "../components/LogIn";
 import NewProfile from "../components/NewProfile";
+import ProfileInfo from "../components/ProfileInfo";
 import { UserProfile } from "../models/UserProfile";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
-    const [profile, setProfile] = useState<UserProfile>();
+    const [profile, setProfile] = useState<UserProfile>(new UserProfile("", "", "", "", "", 0 , 0, 0));
 
     function login(input:UserProfile){
         setProfile(input);
@@ -38,6 +39,8 @@ const AppRoutes:React.FC<unknown> = (props) =>{
             <Route path = '/game/:difficulty' render = {() => { return <GameUI userProfile={profile} />}}/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
+
+            <Route path = '/profile' render = {() => { return <ProfileInfo userProfile={profile} />}}/>
 
             <Route path = '/example' render = { () => {return <DifficultyButton 
                     difficulty='Easy' 
