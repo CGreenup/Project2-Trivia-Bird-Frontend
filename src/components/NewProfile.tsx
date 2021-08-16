@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { UserProfile } from "../models/UserProfile";
+import { ApiPutProfiles } from "../remote/SpringApi";
 
 export default function NewProfile() {
     const [username, setUsername] = useState("");
@@ -23,6 +24,10 @@ export default function NewProfile() {
         userProfile.email = email;
         userProfile.bio = bio;
         event.preventDefault();
+
+        if (ApiPutProfiles(userProfile)) {
+            console.log("Profile created !")
+        } else { console.log("Profile Not Created !")}
     }
 
     return (
