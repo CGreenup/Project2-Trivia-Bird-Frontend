@@ -25,7 +25,7 @@ const AppRoutes:React.FC<unknown> = (props) =>{
             <Route exact path ='/' render = {() => {return(
                 <div className='container-fluid'>
                     <div className='row'>
-                        <h1 className='col-lg-12'>Insert component here! AppRoutes.tsx</h1>
+                        <h1 className='col-lg-12'>Hello ! Welcome to Trivia API !</h1>
                     </div>
                 </div>
             )}}/>
