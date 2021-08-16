@@ -20,11 +20,13 @@ const DifficultyButton: React.FC<Props> = (props) => {
      );
 
     return (
-        <div>
+        <div className = 'container'>
             <input type="radio" className="btn-check" name="options-outlined" id={difficultyText} 
             autoComplete="off" value={difficultyText.toLowerCase()} onClick={props.onClick} onChange={props.onChange}
             style= {{height: '100px'} }/>
-            <label className={"btn btn-lg btn-block btn-outline-" + outlineColor} htmlFor={difficultyText}> {difficultyText} </label>
+            <label className={"btn btn-lg form-control btn-block btn-outline-" + outlineColor} htmlFor={difficultyText}> 
+                <h1>{difficultyText}</h1>
+            </label>
         </div>
     )
 }
