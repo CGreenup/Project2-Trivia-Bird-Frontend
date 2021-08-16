@@ -20,7 +20,8 @@ const LeaderBoard = () => {
 
     
     const profileTable = () => (
-      userProfileSet.map((profiles: UserProfile) => (
+      userProfileSet.map(
+        (profiles: UserProfile) => (
         <tr>
           <td>{userRank++}</td>
           <td>{profiles.screenName}</td>

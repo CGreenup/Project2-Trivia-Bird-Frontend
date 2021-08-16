@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { UserProfile } from "../models/UserProfile";
+import { ApiValidateProfiles } from "../remote/SpringApi";
 
 export default function LogIn() {
     const [username, setUsername] = useState("");
@@ -14,9 +15,12 @@ export default function LogIn() {
     }
 
     function handleSubmit(event: { preventDefault: () => void; }) {
-        userProfile.username = username;
-        userProfile.password = password;
         event.preventDefault();
+        userProfile.username = username;
+        userProfile.password = password;        
+        if (ApiValidateProfiles(userProfile)) {
+            console.log("Profile validated !");
+        } else { console.log("Profile validation failed !");}
     }
 
     return (

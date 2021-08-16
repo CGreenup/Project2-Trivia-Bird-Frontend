@@ -1,7 +1,7 @@
 import { UserProfile } from "../models/UserProfile";
 import SpringClient from "./SpringClient";
 
-//get all profiles from back end
+//get top ten profiles from back end
 export const ApiGetProfiles = async():Promise<UserProfile[]> => {
     const response = await SpringClient.get<UserProfile[]>('/profile/');
 
@@ -10,4 +10,27 @@ export const ApiGetProfiles = async():Promise<UserProfile[]> => {
     }
 
     return [];
+}
+
+
+//check login profile with back end
+export const ApiValidateProfiles = async(checkProfile:UserProfile):Promise<boolean> => {
+    const response = await SpringClient.post<UserProfile>('/profile/', checkProfile);
+
+    if (response.status === 200) {
+        return true;
+    }
+
+    return false;
+}
+
+//create new profile with back end
+export const ApiPutProfiles = async(checkProfile:UserProfile):Promise<boolean> => {
+    const response = await SpringClient.put<UserProfile>('/profile/', checkProfile);
+
+    if (response.status === 200) {
+        return true;
+    }
+
+    return false;
 }
