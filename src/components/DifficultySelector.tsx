@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { UserProfile } from "../models/UserProfile";
 import DifficultyButton from "./DifficultyButton";
 
 type Props = {
-    userId?:number;
+    userProfile?:UserProfile
 }
 
 const DifficultySelector:React.FC<Props> = (props) => {

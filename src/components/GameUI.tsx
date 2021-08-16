@@ -3,10 +3,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { question } from "../models/question";
+import { UserProfile } from "../models/UserProfile";
 import { postAnswer } from "../remote/answerApi";
 import { getQuestion } from "../remote/questionApi";
 
-const GameUI:React.FC<unknown> = () => {
+type Props = {
+    userProfile?: UserProfile
+}
+
+const GameUI:React.FC<Props> = (props) => {
     const params:any  = useParams();
     const difficulty:string = params.difficulty
 
@@ -108,7 +113,16 @@ const GameUI:React.FC<unknown> = () => {
         setSubmit(true);
         setUserAnswer(input);
 
-        let answer:question = new question(difficulty, correctAnswer, input);
+        let username:string = "";
+
+        console.log("profile: ");
+        console.log(props.userProfile);
+
+        if(props.userProfile){
+            username = props.userProfile.username.toString();
+        }
+
+        let answer:question = new question(username, difficulty, correctAnswer, input);
 
         console.log(answer);
         postAnswer(answer);

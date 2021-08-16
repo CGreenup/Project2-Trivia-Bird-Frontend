@@ -4,7 +4,11 @@ import Button from "react-bootstrap/Button";
 import { UserProfile } from "../models/UserProfile";
 import { ApiValidateProfiles } from "../remote/SpringApi";
 
-export default function LogIn() {
+type Props = {
+    callback: (profile:any) => void
+}
+
+const LogIn:React.FC<Props> =  (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const userProfile = UserProfile.prototype;
@@ -14,12 +18,16 @@ export default function LogIn() {
         return username.length > 0 && password.length > 0;
     }
 
-    function handleSubmit(event: { preventDefault: () => void; }) {
+    async function handleSubmit(event: { preventDefault: () => void; }) {
         event.preventDefault();
         userProfile.username = username;
-        userProfile.password = password;        
-        if (ApiValidateProfiles(userProfile)) {
+        userProfile.password = password;
+        let result = await ApiValidateProfiles(userProfile)
+
+        if (result) {
             console.log("Profile validated !");
+            console.log(result);
+            props.callback(result);
         } else { console.log("Profile validation failed !");}
     }
 
@@ -52,3 +60,5 @@ export default function LogIn() {
     );
 }
       
+
+export default LogIn;

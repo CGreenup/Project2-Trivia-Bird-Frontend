@@ -1,6 +1,5 @@
 export class UserProfile {
     constructor(
-        public id:number,
         public username:String,
         public password:String,
         public screenName:String,

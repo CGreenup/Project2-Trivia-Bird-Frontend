@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import DifficultyButton from "../components/DifficultyButton";
 import DifficultySelector from "../components/DifficultySelector";
@@ -6,8 +7,18 @@ import GameUI from "../components/GameUI";
 import LeaderBoard from "../components/LeaderBoard";
 import LogIn from "../components/LogIn";
 import NewProfile from "../components/NewProfile";
+import { UserProfile } from "../models/UserProfile";
 
 const AppRoutes:React.FC<unknown> = (props) =>{
+    const [profile, setProfile] = useState<UserProfile>();
+
+    function login(input:UserProfile){
+        setProfile(input);
+
+        console.log("APP-ROUTES.TSX LOGIN FUNCTION:")
+        console.log(profile);
+    }
+
     return(
         <Switch>
             <Route exact path ='/' render = {() => {return(
@@ -18,13 +29,13 @@ const AppRoutes:React.FC<unknown> = (props) =>{
                 </div>
             )}}/>
             
-            <Route exact path = '/game' component={DifficultySelector}/>
+            <Route exact path = '/game' render={() =>{ return <DifficultySelector userProfile={profile}/> }} />
         
-            <Route path = '/login' component={LogIn}/>
+            <Route path = '/login' render={() => {return <LogIn  callback= {login}/>}}/>
 
             <Route path = '/newprofile' component={NewProfile}/>
             
-            <Route path = '/game/:difficulty' component= {GameUI}/>
+            <Route path = '/game/:difficulty' render = {() => { return <GameUI userProfile={profile} />}}/>
             
             <Route path = '/leaderboard' component={LeaderBoard}/>
 
