@@ -38,7 +38,7 @@ export const ApiPutProfiles = async(checkProfile:UserProfile):Promise<boolean> =
 }
 
 export const ApiUpdateScreenName = async(checkProfile:UserProfile):Promise<boolean> => {
-    const response = await SpringClient.put<UserProfile>('/profile/', checkProfile);
+    const response = await SpringClient.put<UserProfile>('/profile/screenName', checkProfile);
 
     if (response.status === 200) {
         return true;
@@ -48,7 +48,7 @@ export const ApiUpdateScreenName = async(checkProfile:UserProfile):Promise<boole
 }
 
 export const ApiUpdateProfileBio = async(checkProfile:UserProfile):Promise<boolean> => {
-    const response = await SpringClient.put<UserProfile>('/profile/', checkProfile);
+    const response = await SpringClient.put<UserProfile>('/profile/bio', checkProfile);
 
     if (response.status === 200) {
         return true;
